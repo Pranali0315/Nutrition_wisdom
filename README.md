@@ -73,14 +73,14 @@ venv\Scripts\activate
 ```
 # Example Request & Response
 Request:
-
+```bash
 {
   "tool": "analyze_nutrition",
   "params": {
     "food_query": "2 boiled eggs"
   }
 }
-
+```
 Response:
 ```bash
 {
