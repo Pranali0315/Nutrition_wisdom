@@ -39,7 +39,7 @@ Built with **FastMCP**, **asyncio**, and **httpx**, this server can be integrate
 
 ## ⚙️ Installation & Setup
 
-### 2️⃣ Create and activate a virtual environment
+### 1 Create and activate a virtual environment
 
 ```bash
 # Create virtual environment
