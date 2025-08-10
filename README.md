@@ -56,13 +56,13 @@ venv\Scripts\activate
 ### 3  Set up environment variables
 - Create a .env file in the root directory:
 ```bash
-#### Authentication token for MCP server
+# Authentication token for MCP server
 - AUTH_TOKEN=your_auth_token_here
 
-#### To validate the tool
+# To validate the tool
 - MY_NUMBER=your_number_here
 
-#### Nutritionix API credentials
+# Nutritionix API credentials
 - NUTRITIONIX_APP_ID=your_app_id_here
 - NUTRITIONIX_APP_KEY=your_app_key_here
 ```
@@ -82,6 +82,7 @@ Request:
 }
 
 Response:
+```bash
 {
   "food": "egg",
   "serving": {
@@ -104,7 +105,7 @@ Response:
   },
   "source": "Nutritionix API"
 }
-
+```
 
 # 🧪 Testing
 - You can test the MCP server using: Postman
