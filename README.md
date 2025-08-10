@@ -38,10 +38,18 @@ Built with **FastMCP**, **asyncio**, and **httpx**, this server can be integrate
 
 ## ⚙️ Installation & Setup
 
-### 1 Create and activate a virtual environment
-- python -m venv venv
-- venv\Scripts\activate      # Windows
+### 2️⃣ Create and activate a virtual environment
 
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate on Mac/Linux
+source venv/bin/activate
+
+# Activate on Windows
+venv\Scripts\activate 
+```
 ### 2 Install dependencies
 - pip install -r requirements.txt
 
