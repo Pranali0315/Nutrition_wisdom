@@ -1,3 +1,4 @@
+
 # 🍎 Nutrition Analyzer MCP Server
 
 A **stateless MCP (Model Context Protocol) server** that analyzes food items and provides **detailed nutrition facts** using the [Nutritionix API](https://developer.nutritionix.com/).  
@@ -44,14 +45,13 @@ Built with **FastMCP**, **asyncio**, and **httpx**, this server can be integrate
 # Create virtual environment
 python -m venv venv
 
-# Activate on Mac/Linux
-source venv/bin/activate
-
 # Activate on Windows
 venv\Scripts\activate 
 ```
 ### 2 Install dependencies
+```bash
 - pip install -r requirements.txt
+```
 
 ### 3  Set up environment variables
 - Create a .env file in the root directory:
