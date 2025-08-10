@@ -26,12 +26,12 @@ Built with **FastMCP**, **asyncio**, and **httpx**, this server can be integrate
 ---
 
 ## 📂 Project Structure
- Nutrition_wisdom/
-│
-├── server.py # Main MCP server code
-├── .env # Environment variables (not committed to GitHub)
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
+- Nutrition_wisdom/
+- │
+- ├── server.py # Main MCP server code
+- ├── .env # Environment variables (not committed to GitHub)
+- ├── requirements.txt # Python dependencies
+- └── README.md # Project documentation
 
 
 ---
