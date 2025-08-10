@@ -4,13 +4,13 @@ from typing import Annotated
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 
-# Fix import path - adjust based on your actual FastMCP version
+
 try:
     from fastmcp.auth.providers.bearer import BearerAuthProvider, RSAKeyPair
 except ImportError:
     from fastmcp.server.auth.providers.bearer import BearerAuthProvider, RSAKeyPair
 
-# Use FastMCP's error classes if available, fallback to mcp
+
 try:
     from fastmcp import ErrorData, McpError
     from fastmcp.types import INVALID_PARAMS, INTERNAL_ERROR
@@ -25,18 +25,17 @@ from urllib.parse import quote_plus
 
 load_dotenv()
 
-# ===== env / assertions =====
+
 TOKEN = os.environ.get("AUTH_TOKEN")
 MY_NUMBER = os.environ.get("MY_NUMBER")
-NUTRITIONIX_APP_ID = os.environ.get("NUTRITIONIX_APP_ID")  # Add to .env
-NUTRITIONIX_APP_KEY = os.environ.get("NUTRITIONIX_APP_KEY")  # Add to .env
+NUTRITIONIX_APP_ID = os.environ.get("NUTRITIONIX_APP_ID")  
+NUTRITIONIX_APP_KEY = os.environ.get("NUTRITIONIX_APP_KEY")  
 
 assert TOKEN is not None, "Please set AUTH_TOKEN in your .env file"
 assert MY_NUMBER is not None, "Please set MY_NUMBER in your .env file"
 assert NUTRITIONIX_APP_ID is not None, "Please set NUTRITIONIX_APP_ID in your .env file"
 assert NUTRITIONIX_APP_KEY is not None, "Please set NUTRITIONIX_APP_KEY in your .env file"
 
-# ===== Auth provider =====
 class SimpleBearerAuthProvider(BearerAuthProvider):
     def __init__(self, token: str):
         k = RSAKeyPair.generate()
@@ -53,21 +52,21 @@ class SimpleBearerAuthProvider(BearerAuthProvider):
             )
         return None
 
-# ===== ENABLE STATELESS MODE =====
+
 mcp = FastMCP(
     "Nutrition Analyzer MCP Server",
     auth=SimpleBearerAuthProvider(TOKEN),
     stateless_http=True
 )
 
-# ===== validate tool =====
+
 @mcp.tool
 async def validate() -> str:
     return MY_NUMBER
 
-# ===== Nutrition API Helper =====
+
 async def fetch_nutrition_data(query: str) -> dict:
-    """Fetch nutrition data from Nutritionix API"""
+ 
     url = "https://trackapi.nutritionix.com/v2/natural/nutrients"
     headers = {
         "x-app-id": NUTRITIONIX_APP_ID,
@@ -92,7 +91,7 @@ async def fetch_nutrition_data(query: str) -> dict:
                     message="No nutrition data found for this query"
                 ))
                 
-            return data["foods"][0]  # Return first result
+            return data["foods"][0]  
             
         except httpx.HTTPStatusError as e:
             error_msg = f"Nutritionix API error: {e.response.text}"
@@ -103,7 +102,7 @@ async def fetch_nutrition_data(query: str) -> dict:
                 message=f"Nutrition data fetch failed: {str(e)}"
             ))
 
-# ===== Main Nutrition Tool =====
+
 NutritionAnalyzerDescription = {
     "description": "Get detailed nutrition facts for food items.",
     "use_when": "User asks about calories or nutrients in food.",
@@ -127,7 +126,7 @@ async def analyze_nutrition(
     try:
         nutrition_data = await fetch_nutrition_data(food_query)
         
-        # Format the essential nutrition facts
+      
         return {
             "food": nutrition_data.get("food_name", "Unknown"),
             "serving": {
@@ -157,7 +156,6 @@ async def analyze_nutrition(
             message=f"Failed to analyze nutrition: {str(e)}"
         ))
 
-# ===== run server =====
 async def main():
     print("🚀 Starting Nutrition Analyzer MCP server in STATELESS mode on http://0.0.0.0:8086")
     await mcp.run_async("streamable-http", host="0.0.0.0", port=8086)
