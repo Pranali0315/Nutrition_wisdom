@@ -59,6 +59,9 @@ mcp = FastMCP(
     stateless_http=True
 )
 
+@mcp.tool
+async def about() -> dict:
+    return {"name": "NutritiWisdom", "description": "A MCP server which gives you nutritional information of various food items"}
 
 @mcp.tool
 async def validate() -> str:
